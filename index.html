@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study Reading Mode Demo</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        nav { position: fixed; top: 0; left: 20px; width: 120px; padding-top: 100px; }
+        nav a { display: block; margin-bottom: 10px; text-decoration: none; }
+        .content-container { margin-left: 140px; }
+        [data-read-section] { border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <strong>Navigate:</strong>
+        <a href="#purpose">Purpose</a>
+        <a href="#approach">Approach</a>
+        <a href="#results">Results</a>
+        <a href="#why">Why (Alias)</a>
+    </nav>
+
+    <div class="content-container">
+        <h1>My Case Study</h1>
+
+        <div class="read-control" data-read-control>
+          <div class="read-seg">
+            <button class="seg-btn" data-read-mode-btn="short">
+              <span class="seg-label">Short</span>
+            </button>
+            <button class="seg-btn" data-read-mode-btn="mid">
+              <span class="seg-label">Medium</span>
+            </button>
+            <button class="seg-btn" data-read-mode-btn="full">
+              <span class="seg-label">Full</span>
+            </button>
+            <div class="seg-indicator" data-read-indicator></div>
+          </div>
+        </div>
+
+        <div data-read-section="short" aria-hidden="true">
+          <h2>The Purpose</h2>
+          <p>Short summary of purpose...</p>
+          <h2>The Approach</h2>
+          <p>Short summary of approach...</p>
+          <h2>The Results</h2>
+          <p>Short summary of results.</p>
+        </div>
+        
+        <div data-read-section="mid" aria-hidden="true">
+          <h2>The Purpose</h2>
+          <p>Medium details about purpose. We wanted to solve a key problem for users...</p>
+          <h2>The Approach</h2>
+          <p>Medium details about approach. We used a mixed-methods approach...</p>
+          <h2>The Results</h2>
+          <p>Medium details about results. We saw a 20% lift in engagement...</p>
+        </div>
+        
+        <div data-read-section="full" aria-hidden="true">
+          <h2>The Purpose</h2>
+          <p>Full, in-depth explanation of the project's purpose...</p>
+          <h2>The Approach</h2>
+          <p>Full, in-depth explanation of our methodology...</p>
+          <h2>The Results</h2>
+          <p>Full, in-depth explanation of the metrics and outcomes...</p>
+        </div>
+
+    </div> <script src="script.js"></script>
+
+</body>
+</html>
