@@ -19,31 +19,42 @@ This solution is platform-agnostic. It was originally built for Webflow but has 
 
 ## How to Use
 
-### Step 1: Add the HTML Structure
+### Step 1: Add HTML Attributes
 
-This script relies on specific `data-attributes` to function. You must add these attributes to your HTML.
+You don't need to change your existing HTML structure, just add `data-attributes` to your elements.
 
-#### 1. The Controls
+* **On your button controls:**
+    * Add `data-read-control` to the main wrapper of your button group.
+    * Add `data-read-mode-btn="short"` (or "mid", "full") to each button. The value must match the content section it controls.
+    * Add `data-read-indicator` to the empty `<div>` or `<span>` you want to use as the sliding underline.
+* **On your content sections:**
+    * Add `data-read-section="short"` (or "mid", "full") to the wrapper for each version of your case study content. The value must match the button that controls it.
 
-This is the button group for toggling modes.
+### Step 2: Link the CSS and JS Files
 
-* `[data-read-control]`: The wrapper for the entire button group.
-* `[data-read-mode-btn="..."]`: The individual buttons. The value **must match** the value of the content section it controls (e.g., "short", "mid", "full").
-* `[data-read-indicator]`: The empty element used for the sliding underline.
+You need to link the `style.css` and `script.js` files to your main HTML page.
 
-**Example HTML:**
-```html
-<div class="read-control" data-read-control>
-  <div class="read-seg">
-    <button class="seg-btn" data-read-mode-btn="short">
-      <span class="seg-label">Short</span>
-    </button>
-    <button class="seg-btn" data-read-mode-btn="mid">
-      <span class="seg-label">Medium</span>
-    </button>
-    <button class="seg-btn" data-read-mode-btn="full">
-      <span class="seg-label">Full</span>
-    </button>
-    <div class="seg-indicator" data-read-indicator></div>
-  </div>
-</div>
+* **CSS:** Add the `style.css` file to your project. In your HTML file, place a `<link>` tag pointing to it inside your `<head>` section.
+* **JS:** Add the `script.js` file to your project. In your HTML file, place a `<script>` tag pointing to it just before the closing `</body>` tag.
+
+### Step 3: Configure the Script
+
+This is the most important part for the smart anchor linking to work.
+
+1.  Open the **`script.js`** file in a text editor.
+2.  At the very top, you will see a "USER CONFIGURATION" section with several constants.
+3.  **`CANON`**: Edit this Map to define your "official" section slugs. You must map the text of your headings (like "The Purpose") to a simple slug (like "purpose").
+4.  **`LINK_ALIASES`**: Edit this Map to catch any alternate link names. For example, if your nav link is `href="#why"`, you can map it to your canonical "purpose" slug.
+5.  **`ALLOWED`**: Add all your final canonical slugs (like "purpose", "results", etc.) to this Set. This is a security filter.
+6.  **`VALID_MODES`**: If you don't use "short", "mid", "full", you must update this Set to match the values you used in your HTML `data-` attributes (e.g., "summary", "detailed").
+
+---
+
+## Platform-Specific Notes
+
+* **Webflow:** This code can be used directly in Webflow.
+    1.  Copy the contents of `style.css` and paste them into your project's `Custom Code` in the `<head>` tag.
+    2.  Copy the contents of `script.js` and paste them into your project's `Custom Code` in the `</body>` tag.
+    3.  Use the Webflow Designer to add the required `data-` attributes to your elements (e.g., `data-read-control`, `data-read-section="short"`, etc.).
+* **WordPress:** You can use a plugin like "Insert Headers and Footers" or "Code Snippets" to add the CSS and JS. Then, in the block editor (Gutenberg), you can add custom `data-` attributes to your "Group" or "Column" blocks, or by editing the HTML directly.
+* **Any Other CMS:** As long as your platform allows you to add custom CSS/JS and add `data-attributes` to your HTML elements, this script will work.
